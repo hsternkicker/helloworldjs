@@ -1,0 +1,23 @@
+{
+  "name": "mynodejsapp",
+  "description": "sample application",
+  "main": "app.js",
+  "authors": [
+    "Henning <henning.sternkicker@de.ibm.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "jquery": "^3.5.1",
+    "fontawesome": "^5.14.0"
+  }
+}

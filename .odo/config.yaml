@@ -1,0 +1,14 @@
+kind: LocalConfig
+apiversion: odo.dev/v1alpha1
+ComponentSettings:
+  Type: nodejs
+  SourceLocation: ./
+  SourceType: local
+  Ports:
+  - 8080/TCP
+  Application: app
+  Project: mynodejsapp
+  Name: nodejs-mynodejsapp-xhoh
+  Url:
+  - Name: nodejs-mynodejsapp-xhoh-8080
+    Port: 8080
