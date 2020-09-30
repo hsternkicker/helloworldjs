@@ -1,1 +1,23 @@
-# tbd add deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: helloworldjs
+  name: helloworldjs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helloworldjs
+  template:
+    metadata:
+      labels:
+        app: helloworldjs
+    spec:
+      containers:
+        - image: quay.io/hsternkicker/helloworldjs:0.1
+          imagePullPolicy: Always
+          name: helloworldjs
+          ports:
+            - containerPort: 8080
+              protocol: TCP
