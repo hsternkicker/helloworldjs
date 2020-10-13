@@ -1,0 +1,101 @@
+apiVersion: app.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: devchan-hwjschan-deployment
+  namespace: hwjs-entitlement
+  annotations:
+    app.ibm.com/is-local-deployable: "false"
+  labels:
+    app: hwjschan
+    component: main
+    package: hwjs
+spec:
+  template:
+    kind: Deployment
+    apiVersion: apps/v1
+    metadata:
+      name: devchan-hwjschan-deployment
+      labels:
+        app: hwjschan
+    spec:
+      selector:
+        matchLabels:
+          app: hwjschan
+          release: hwjs-devchan
+          tier: frontend
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            app: hwjschan
+            release: hwjs-devchan
+            tier: frontend
+        spec:
+          containers:
+            - name: helloworldjs
+              image: "docker.io/hsternkicker/helloworldjs:latest"
+              imagePullPolicy: Always
+              ports:
+                - containerPort: 8080
+                  protocol: TCP
+---
+apiVersion: app.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: devchan-hwjschan-service
+  namespace: hwjs-entitlement
+  annotations:
+    app.ibm.com/is-local-deployable: "false"
+  labels:
+    app: hwjschan
+    component: main
+    package: hwjs
+spec:
+  template:
+    kind: Service
+    apiVersion: v1
+    metadata:
+      name: devchan-hwjschan-service
+      labels:
+        app: hwjschan
+    spec:
+      type: NodePort
+      ports:
+        - name: 8080-tcp
+          port: 8080
+          targetPort: 8080
+          protocol: TCP
+      selector:
+        app: hwjschan
+        release: hwjs-devchan
+        tier: frontend
+---
+apiVersion: app.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: devchan-hwjschan-route
+  namespace: hwjs-entitlement
+  annotations:
+    app.ibm.com/is-local-deployable: "false"
+  labels:
+    app: hwjschan
+    component: main
+    package: hwjs
+spec:
+  template:
+    apiVersion: route.openshift.io/v1
+    kind: Route
+    metadata:
+      labels:
+        app: devchan-hwjschan-route
+      name: hwjs
+    spec:
+      port:
+        targetPort: 8080-tcp
+      subdomain: ""
+      to:
+        kind: Service
+        name: devchan-hwjschan-service
+        weight: 100
+      wildcardPolicy: None  
+

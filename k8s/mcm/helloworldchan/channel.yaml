@@ -1,0 +1,11 @@
+apiVersion: app.ibm.com/v1alpha1
+kind: Channel
+metadata:
+  name: hwjschan
+  namespace: hwjs-entitlement
+  labels:
+    app: hwjschan
+spec:
+  type: Namespace
+  pathname: hwjs-entitlement
+

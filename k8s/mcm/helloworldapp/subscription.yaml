@@ -1,0 +1,28 @@
+apiVersion: app.ibm.com/v1alpha1
+kind: Subscription
+metadata:
+  name: hwjs101-hwjsapp
+  namespace: hwjs-project
+  labels:
+    app: hwjsapp
+    release: hwjs101
+spec:
+  channel: hwjs-entitlement/hwjschan
+  name: ""
+  packageFilter:
+    version: ">=1.x"
+    labelSelector:
+      matchLabels:
+        package: hwjs 
+        component: main
+  placement:
+    placementRef:
+      name: hwjsapp101-hwjsapp
+      kind: PlacementRule
+      group: app.ibm.com
+  overrides:
+  - clusterName: "/"
+    clusterOverrides:
+    - path: "metadata.namespace"
+      value: default
+

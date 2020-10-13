@@ -1,0 +1,14 @@
+apiVersion: app.ibm.com/v1alpha1
+kind: PlacementRule
+metadata:
+  name: hwjsapp101-hwjsapp
+  namespace: hwjs-project
+  labels:
+    app: hwjsapp
+    release: hwjs101
+spec:
+  clusterReplicas: 1
+  clusterLabels:
+    matchLabels:  
+      environment: DEV 
+
